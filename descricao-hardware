@@ -1,0 +1,39 @@
+2.1. ESP32
+ 
+Figura 1. Módulo ESP32
+
+O módulo ESP32 é um módulo Wi-Fi de alta performance, com um baixo consumo de energia. É uma evolução do ESP8266, com maior poder de processamento 
+e bluetooth BLE 4.2 embutido.
+A placa possui o chip ESP32 com antena embutida, uma interface usb-serial e regulador de tensão 3.3V. A programação pode ser feita em LUA ou usando
+a IDE do Arduino através de um cabo micro-usb.
+A placa controladora ESP32 foi utilizada em lugar de um Arduino ou outro pela possibilidade de conexão com a internet, por já apresentar um conector
+embutido na placa, mostrou-se a melhor escolha por razões de praticidade. Ele será utilizado para conexão dos outros componentes do projeto.
+No projeto de porta inteligente no qual me baseio, Basha (2016), é utilizado o Rapberry Pi, mas nesse projeto foi optado o ESP32 por acessibilidade. 
+Além disso, no artigo o sistema é conectado aos Serviços Web da Amazon, enquanto nesse artigo é proposto uma conexão MQTT com Hivemq. 
+
+2.2. Sensor de movimento PIR
+ 
+Figura 2. Sensor de movimento PIR
+O sensor em si é apenas um pequeno retângulo de material sensível posicionado sobre um substrato plástico, possuindo uma área de cobertura (campo de
+visão) limitado. Por conta disso, ele é recoberto com um domo plástico composto por lentes especiais, do tipo Lentes de Fresnel, que permitem aumentar
+seu campo de visão consideravelmente e focalizar a luz infravermelha. A lente condensa uma grande área em uma área pequena, adequada para sensibilizar
+o material sensível
+Quando a quantidade de radiação infravermelha muda repentinamente, o sensor é acionado, o que ocorre quando m objeto se move em frente ao campo de visão
+do sensor, causando um transiente no sinal. Quanto mais quente o objeto, mais radiação ele emite, e mais facilmente é detectado.
+O que o sensor detecta na verdade é movimento, representado por uma mudança nos níveis de IR detectados, porém não os níveis absolutos em si (não serve
+para medir níveis de radiação infravermelha).
+Este sensor PIR muda o estado de seu pino de saída para HIGH (alto) quando é detectado movimento, acionando os alertas. 
+
+2.3. Outros componentes
+1.	Resistor 1kΩ
+Utilizado para que o LED funcione apropriadamente, impedindo que a corrente elétrica o queime.
+
+ 
+Figura 3. Resistor de 1kΩ
+2.	LED
+Utilizado para representar um sinal de luz que possa ser emitido ao disparar o alerta.
+ 
+Figura 4. LED padrão
+
+3.	Fios comuns
+Utilizados para conexão e ativação dos componentes do sistema.
