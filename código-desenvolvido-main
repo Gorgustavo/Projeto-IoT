@@ -1,0 +1,62 @@
+#include "EspMQTTClient.h"
+
+EspMQTTClient client(
+  "Wokwi-GUEST",         // SSID WiFi
+  "",                    // Password WiFi
+  //"test.mosquitto.org",  // MQTT Broker
+  "broker.hivemq.com",  // MQTT Broker
+  "mqtt-mack",          // Client
+  1883                   // MQTT port
+);
+
+int LED = 13;
+int pin = 15;
+ 
+void setup()
+{
+  pinMode(pin,INPUT);
+  pinMode(LED, OUTPUT);
+ 
+  Serial.begin(115200);
+
+  client.enableDebuggingMessages(); // Enable debugging messages sent to serial output
+  client.enableHTTPWebUpdater(); // Enable the web updater. User and password default to values of MQTTUsername and MQTTPassword. These can be overridded with enableHTTPWebUpdater("user", "password").
+  client.enableOTA(); // Enable OTA (Over The Air) updates. Password defaults to MQTTPassword. Port is the default OTA port. Can be overridden with enableOTA("password", port).
+  client.enableLastWillMessage("TestClient/lastwill", "Vou ficar offline");
+
+}
+
+void pisca_alerta() {
+  int x;
+  for (x=0;x<15;x++); {
+  digitalWrite(LED, HIGH);
+  delay(400);
+  digitalWrite(LED, LOW);
+  delay(100);
+  }
+}
+
+void lerEnviarDados() {
+  bool isDetected = digitalRead(pin);
+ 
+  if(isDetected){
+  client.publish("mackenzie20521448/movimento", "A porta foi aberta!\nVerifique as câmeras agora!");
+  pisca_alerta();
+  }
+}
+
+void onConnectionEstablished()
+{
+    client.subscribe("mackenzie20521448/msgRecebida/#", [](const String & topic, const String & payload) {
+    Serial.println("Mensagem recebida no topic: " + topic + ", payload: " + payload);
+  });
+
+  lerEnviarDados();
+}
+ 
+void loop()
+{
+  client.loop();
+  lerEnviarDados();
+  delay(3500);
+}
