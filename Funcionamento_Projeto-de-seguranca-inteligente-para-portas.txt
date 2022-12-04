@@ -1,0 +1,5 @@
+Descrição do Funcionamento:
+
+O sensor é posicionado na parte superior da porta e, assim que a porta for aberta, o seu movimento é detectado e o LED (Luzes de alarme) são ativadas,
+além de enviar mensagens de alerta para o proprietário do equipamento.
+
