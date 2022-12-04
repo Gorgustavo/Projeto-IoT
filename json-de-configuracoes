@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "author": "Gustavo da Rocha",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -77.34, "left": -177.33, "attrs": {} },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -85.72,
+      "left": -27.24,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -69.6,
+      "left": -250.07,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 60.4,
+      "left": -252.53,
+      "attrs": { "value": "1000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "pir1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "pir1:OUT", "esp:D15", "green", [ "v0" ] ],
+    [ "pir1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led1:A", "esp:D13", "green", [ "v0" ] ],
+    [ "led1:C", "r1:1", "green", [ "v-0.53", "h-17.76" ] ],
+    [ "r1:2", "esp:GND.2", "green", [ "v0" ] ]
+  ]
+}
